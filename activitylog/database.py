@@ -288,7 +288,7 @@ class DatabaseHandler:
                                 for i in range(len(working_buffer[table_name])):
                                     if str(working_buffer[table_name][i].get(key_name, None)) == str(duplicate_value):
                                         working_buffer[table_name][i][key_name] = generate_unique_id()
-                                        break
+                                        # break
                             else:
                                 # have to update all keys
                                 for i in range(len(working_buffer[table_name])):

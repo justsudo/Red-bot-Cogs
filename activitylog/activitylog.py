@@ -395,7 +395,7 @@ class ActivityLogger(commands.Cog):
                 url = att.url
 
             new_data = data.copy()
-            new_data["id"] = att.id
+            new_data["id"] = generate_unique_id()
             new_data["url"] = url
             new_data["filepath"] = full_path
             new_data["attachment_message_id"] = attachment_message_id
@@ -480,6 +480,8 @@ class ActivityLogger(commands.Cog):
         else:
             # there should only be one updated flag
             action, state = get_voice_flags(before, after)
+            if action is None:
+                return None
 
         voice_data = {
             "datetime": discord.utils.utcnow(),
