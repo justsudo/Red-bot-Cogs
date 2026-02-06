@@ -265,7 +265,7 @@ class DatabaseHandler:
             except Exception as e:
                 buffer_session.rollback()
                 print(f"Error during buffered {buffer} to '{table_name}': {e}")
-                if "buffer" == "insert":
+                if buffer == "insert":
                     if "Duplicate entry" in str(e) or "UNIQUE constraint failed" in str(e):
                         # pymysql:
                         if "Duplicate entry" in str(e):
