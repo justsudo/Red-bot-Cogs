@@ -61,12 +61,10 @@ def get_voice_flags(old: discord.VoiceState, new: discord.VoiceState):
     new_flags = {k: getattr(new, k) for k in attrs}
     updated = {key: new_flags[key] for key in new_flags if key in old_flags and new_flags[key] != old_flags[key]}
 
-    if not updated:
-        return None, None
+    for key, value in updated.items():
+        return key, value
 
-    try:
-        return next(iter(updated.items()))
-    except StopIteration:
+    return None, None
 
 
 def compare_permissions(before_po: discord.PermissionOverwrite, after_po: discord.PermissionOverwrite):

@@ -565,6 +565,8 @@ class ActivityLogger(commands.Cog):
                     await handler.run_in_thread(handler.insert, "attachments", a)
         elif log_type == "voice":
             voice_data = await self.process_voice(**kwargs)
+            if voice_data is None:
+                return
             if safe_insert:
                 await handler.run_in_thread(handler.safe_insert, "voice", voice_data)
             else:
@@ -3572,7 +3574,12 @@ class ActivityLogger(commands.Cog):
     ):
         if await self.bot.cog_disabled_in_guild(self, member.guild):
             return
-        if not self.should_log(before.channel):
+
+        # Check if we should log either the old or new channel
+        should_log_before = before.channel and self.should_log(before.channel)
+        should_log_after = after.channel and self.should_log(after.channel)
+
+        if not (should_log_before or should_log_after):
             return
 
         await self.log("voice", guild=member.guild, member=member, before=before, after=after)

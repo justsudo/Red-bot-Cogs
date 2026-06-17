@@ -14,6 +14,8 @@
         "openai",
         "tiktoken",
         "transformers",
-        "huggingface-hub"
+        "huggingface-hub",
+        "emoji",
+        "typing-extensions>=4.6.0"
     ]
 }
