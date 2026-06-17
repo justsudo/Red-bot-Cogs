@@ -11,7 +11,7 @@
         "chromadb",
         "sentence-transformers",
         "ollama",
-        "openai",
+        "openai<2.9.0",
         "tiktoken",
         "transformers",
         "huggingface-hub",
